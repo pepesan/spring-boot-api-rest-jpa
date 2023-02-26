@@ -6,16 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
-import org.springframework.test.web.servlet.result.JsonPathResultMatchers;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -70,6 +64,29 @@ public class ApiControllerTest {
         mockMvc.perform(
                         MockMvcRequestBuilders
                                 .get("/api/dato/1")
+                                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json(mapper.writeValueAsString(new Dato(1L,"valor"))));
+    }
+    @Test
+    public void testUpdateShouldReturnDato() throws Exception {
+        testAddShouldReturnDato();
+        mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .put("/api/dato/1")
+                                .content(asJsonString(new Dato(0L,"valor1")))
+                                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json(mapper.writeValueAsString(new Dato(1L,"valor1"))));
+    }
+    @Test
+    public void testRemoveByIDShouldReturnDato() throws Exception {
+        testAddShouldReturnDato();
+        mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .delete("/api/dato/1")
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))

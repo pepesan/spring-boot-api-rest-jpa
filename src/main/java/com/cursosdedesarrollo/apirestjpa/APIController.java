@@ -29,8 +29,7 @@ public class APIController {
     }
 
 
-    @RequestMapping(value = "/{id}",method =
-            RequestMethod.PUT)
+    @PutMapping(value = "/{id}")
     public Dato editDatoById(
             @PathVariable("id") Long id,
             @RequestBody Dato dato) {
@@ -43,17 +42,16 @@ public class APIController {
         }else{
             return new Dato();
         }
-
-
     }
-    /*
-    @RequestMapping(value = "/{id}",method =
-            RequestMethod.DELETE)
+
+    @DeleteMapping(value = "/{id}")
     public Dato deleteDatoById(@PathVariable Long id){
-        Dato dato= this.datoRepository.getOne(id);
-        this.datoRepository.delete(dato);
-        return dato;
+        Dato d = this.listado.stream().filter(elemento -> elemento.getId().equals(id)).findFirst().orElse(null);
+        if (d !=null){
+            this.listado.remove(d);
+            return d;
+        }else{
+            return new Dato();
+        }
     }
-
-     */
 }
