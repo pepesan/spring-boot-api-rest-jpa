@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+// Ref: https://spring.io/guides/gs/testing-web/
+
 @SpringBootTest
 public class SmokeTest {
     @Autowired
