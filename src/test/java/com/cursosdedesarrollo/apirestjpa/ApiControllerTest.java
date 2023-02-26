@@ -47,9 +47,9 @@ public class ApiControllerTest {
                                 .get("/api/dato")
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 // comprobación del contenido
-                // .andExpect(content().json(mapper.writeValueAsString(new ArrayList<Dato>())));
+                .andExpect(content().json(mapper.writeValueAsString(new ArrayList<Dato>())));
     }
     public static String asJsonString(final Object obj) {
         try {
