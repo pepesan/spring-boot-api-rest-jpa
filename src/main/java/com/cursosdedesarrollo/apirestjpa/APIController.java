@@ -1,6 +1,8 @@
 package com.cursosdedesarrollo.apirestjpa;
 
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,6 +23,14 @@ public class APIController {
         this.listado.add(dato);
         return dato;
     }
+
+    @GetMapping("/clear")
+    public Long clearData(){
+        this.listado = new ArrayList<>();
+        this.lastID = 0L;
+        return this.lastID;
+    }
+
     @GetMapping("/{id}")
     public Dato showDatoById(@PathVariable("id") Long id){
         Dato d = this.listado.stream().filter(dato -> dato.getId().equals(id)).findFirst().orElse(null);
