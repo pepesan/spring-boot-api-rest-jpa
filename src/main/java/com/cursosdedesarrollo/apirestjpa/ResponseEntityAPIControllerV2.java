@@ -1,5 +1,6 @@
 package com.cursosdedesarrollo.apirestjpa;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/dato/responsev2/")
+@Tag(name = "response-entity-controller-advice", description = "the ResponseEntity ControllerAdvice API")
 public class ResponseEntityAPIControllerV2 {
 
     public List<Dato> listado = new LinkedList<>();
@@ -34,6 +36,7 @@ public class ResponseEntityAPIControllerV2 {
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus
     public ResponseEntity<Dato> showDatoById(@PathVariable("id") Long id){
         Dato d = this.listado.stream().filter(dato -> dato.getId().equals(id)).findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("Not found Tutorial with id = " + id));
@@ -44,6 +47,7 @@ public class ResponseEntityAPIControllerV2 {
 
 
     @PutMapping(value = "/{id}")
+    @ResponseStatus
     public ResponseEntity<Dato> editDatoById(
             @PathVariable("id") Long id,
             @RequestBody Dato dato) {
@@ -57,6 +61,7 @@ public class ResponseEntityAPIControllerV2 {
     }
 
     @DeleteMapping(value = "/{id}")
+    @ResponseStatus
     public ResponseEntity<Dato> deleteDatoById(@PathVariable Long id){
         Dato d = this.listado.stream().filter(elemento -> elemento.getId().equals(id)).findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("Not found Tutorial with id = " + id));

@@ -1,5 +1,6 @@
 package com.cursosdedesarrollo.apirestjpa;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/dato/response/")
+@Tag(name = "response-entity", description = "the ResponseEntity API")
 public class ResponseEntityAPIController {
 
     public List<Dato> listado = new LinkedList<>();

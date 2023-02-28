@@ -3,6 +3,7 @@ package com.cursosdedesarrollo.apirestjpa;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 
 @Data
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class Dato {
     private Long id;
 
+    @NonNull
     private String cadena;
 
     public Dato(){
