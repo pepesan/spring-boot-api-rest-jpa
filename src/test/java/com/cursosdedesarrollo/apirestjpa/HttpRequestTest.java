@@ -1,5 +1,6 @@
 package com.cursosdedesarrollo.apirestjpa;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@Tag("Aceptance")
 public class HttpRequestTest {
 
     @Value(value="${local.server.port}")

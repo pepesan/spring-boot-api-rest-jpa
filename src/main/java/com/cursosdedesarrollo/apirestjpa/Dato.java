@@ -6,11 +6,15 @@ import lombok.NoArgsConstructor;
 
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Dato {
     private Long id;
 
     private String cadena;
+
+    public Dato(){
+        this.id = 0L;
+        this.cadena = "";
+    }
 
 }

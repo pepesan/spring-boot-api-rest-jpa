@@ -125,7 +125,6 @@ public class ResponseEntityApiControllerV2Test {
     }
     @Test
     public void testRemoveByIDShouldNotReturnDato() throws Exception {
-        testAddShouldReturnDato();
         mockMvc.perform(
                         MockMvcRequestBuilders
                                 .delete(BASEURL+"1")
