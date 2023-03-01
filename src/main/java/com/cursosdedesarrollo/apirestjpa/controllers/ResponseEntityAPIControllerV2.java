@@ -3,6 +3,7 @@ package com.cursosdedesarrollo.apirestjpa.controllers;
 import com.cursosdedesarrollo.apirestjpa.dto.Dato;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,10 @@ public class ResponseEntityAPIControllerV2 {
     public Long lastID = 0L;
     @GetMapping
     public ResponseEntity<List<Dato>> index(){
-        return ResponseEntity.ok(this.listado);
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Content-Type",
+                "application/json");
+        return ResponseEntity.ok().headers(responseHeaders).body(this.listado);
     }
     @PostMapping
     public ResponseEntity<Dato> addDato(@RequestBody Dato dato) {
