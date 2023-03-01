@@ -21,6 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
      References:
      - https://www.javainuse.com/spring/boot-jwt
      - https://github.com/Ozair0/Spring-Boot-3-Auth-JWT-Cookie-JPA
+     - https://jskim1991.medium.com/spring-boot-tdd-with-spring-boot-starter-security-jwt-d29e455c08cb
  */
 
 @Configuration
