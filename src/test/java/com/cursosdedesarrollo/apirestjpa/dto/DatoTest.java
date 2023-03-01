@@ -1,6 +1,7 @@
-package com.cursosdedesarrollo.apirestjpa;
+package com.cursosdedesarrollo.apirestjpa.dto;
 
 
+import com.cursosdedesarrollo.apirestjpa.dto.Dato;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 

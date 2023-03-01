@@ -1,5 +1,6 @@
-package com.cursosdedesarrollo.apirestjpa;
+package com.cursosdedesarrollo.apirestjpa.controllers;
 
+import com.cursosdedesarrollo.apirestjpa.dto.Dato;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

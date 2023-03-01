@@ -1,4 +1,4 @@
-package com.cursosdedesarrollo.apirestjpa;
+package com.cursosdedesarrollo.apirestjpa.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

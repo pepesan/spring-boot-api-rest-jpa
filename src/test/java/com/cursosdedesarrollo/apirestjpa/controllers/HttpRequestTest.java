@@ -1,4 +1,4 @@
-package com.cursosdedesarrollo.apirestjpa;
+package com.cursosdedesarrollo.apirestjpa.controllers;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

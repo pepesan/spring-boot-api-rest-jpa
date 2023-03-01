@@ -1,5 +1,6 @@
-package com.cursosdedesarrollo.apirestjpa;
+package com.cursosdedesarrollo.apirestjpa.controllers;
 
+import com.cursosdedesarrollo.apirestjpa.dto.Dato;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

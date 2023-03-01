@@ -1,7 +1,8 @@
-package com.cursosdedesarrollo.apirestjpa;
+package com.cursosdedesarrollo.apirestjpa.controllers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.cursosdedesarrollo.apirestjpa.controllers.MiRestController;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

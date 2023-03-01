@@ -1,5 +1,6 @@
-package com.cursosdedesarrollo.apirestjpa;
+package com.cursosdedesarrollo.apirestjpa.advice;
 
+import com.cursosdedesarrollo.apirestjpa.dto.ErrorMessage;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
