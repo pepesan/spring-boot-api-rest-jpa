@@ -1,6 +1,7 @@
 package com.cursosdedesarrollo.apirestjpa.controllers;
 
 import com.cursosdedesarrollo.apirestjpa.dto.Dato;
+import com.cursosdedesarrollo.apirestjpa.dto.ErrorMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -27,7 +29,7 @@ public class ResponseEntityApiControllerV2Test {
 
     @BeforeEach
     public void clearRestData() throws Exception {
-        System.out.println("limpiando");
+//        System.out.println("limpiando");
         mockMvc.perform(
                         MockMvcRequestBuilders
                                 .get(BASEURL+"clear")
@@ -126,10 +128,16 @@ public class ResponseEntityApiControllerV2Test {
     }
     @Test
     public void testRemoveByIDShouldNotReturnDato() throws Exception {
+        ErrorMessage message = new ErrorMessage(
+                404,
+                "Not found Tutorial with id = 1",
+                "Error capturado por ResourceNotFoundException");
         mockMvc.perform(
                         MockMvcRequestBuilders
                                 .delete(BASEURL+"1")
                                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is(404));
+                .andExpect(status().is(404))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json(mapper.writeValueAsString(message)));
     }
 }
