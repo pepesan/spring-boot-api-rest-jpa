@@ -3,6 +3,7 @@ package com.cursosdedesarrollo.apirestjpa.controllers;
 import com.cursosdedesarrollo.apirestjpa.dto.Dato;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -25,7 +26,17 @@ public class APIController {
     @GetMapping
     @Operation(summary = "show list of dato objects", description = "Shows a list of dato in an output array", tags = { "dato" })
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successful operation", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Dato.class)), @Content(mediaType = "application/xml", schema = @Schema(implementation = Dato.class)) }),
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successful operation",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = Dato.class))),
+                            @Content(
+                                    mediaType = "application/xml",
+                                    array = @ArraySchema(schema = @Schema(implementation = Dato.class)))
+                    }),
             @ApiResponse(description = "successful operation")
 
     })
