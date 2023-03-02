@@ -3,6 +3,8 @@ package com.cursosdedesarrollo.apirestjpa.controllers;
 import com.cursosdedesarrollo.apirestjpa.entities.Alumno;
 import com.cursosdedesarrollo.apirestjpa.repositories.AlumnoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,9 +12,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.hateoas.Link;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.List;
 
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -21,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@Slf4j
 public class AlumnoControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -33,15 +39,34 @@ public class AlumnoControllerTest {
 
     private String baseURL = "/api/alumno";
 
+    private static Long lastID;
+
+    @BeforeAll
+    public static void init (){
+        lastID = 0L;
+    }
+
     @BeforeEach
     public void setUp() throws Exception {
-        testDeteleAll();
+        List<Alumno> list = this.alumnoRepository.findMaxId();
+        if (list.size()>0){
+            lastID = list.get(0).getId();
+            testDeteleAll();
+        }
     }
 
     @Test
     @DisplayName("test alumno index list")
     public void testIndex() throws Exception {
         mockMvc.perform(get(baseURL)
+                        .contentType("application/json"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("test alumno lastid")
+    public void testLastId() throws Exception {
+        mockMvc.perform(get(baseURL+"/lastid")
                         .contentType("application/json"))
                 .andExpect(status().isOk());
     }
@@ -73,7 +98,13 @@ public class AlumnoControllerTest {
         alumnoSalida.setNombre("David");
         alumnoSalida.setApellidos("Vaquero");
         alumnoSalida.setEdad(44);
-        alumnoSalida.setId(1L);
+        log.info("lastID: "+lastID);
+        if (lastID >= 1){
+            lastID++;
+        }else{
+            lastID = 1L;
+        }
+        alumnoSalida.setId(lastID);
         mockMvc.perform(post(baseURL)
                         .contentType("application/json")
                         .content(asJsonString(alumno))
@@ -82,6 +113,8 @@ public class AlumnoControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 // comprobación del contenido
                 .andExpect(content().json(asJsonString(alumnoSalida)));
+        lastID = this.alumnoRepository.findMaxId().get(0).getId();
+        log.info("add lastId: "+ lastID);
     }
 
     @Test
@@ -92,8 +125,9 @@ public class AlumnoControllerTest {
         alumnoSalida.setNombre("David");
         alumnoSalida.setApellidos("Vaquero");
         alumnoSalida.setEdad(44);
-        alumnoSalida.setId(1L);
-        mockMvc.perform(get(baseURL+"/1")
+        log.info("lastID"+lastID);
+        alumnoSalida.setId(lastID);
+        mockMvc.perform(get(baseURL+"/"+lastID)
                         .contentType("application/json"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -113,8 +147,8 @@ public class AlumnoControllerTest {
         alumnoSalida.setNombre("David2");
         alumnoSalida.setApellidos("Vaquero2");
         alumnoSalida.setEdad(45);
-        alumnoSalida.setId(1L);
-        mockMvc.perform(put(baseURL+"/1")
+        alumnoSalida.setId(lastID);
+        mockMvc.perform(put(baseURL+"/"+lastID)
                         .contentType("application/json")
                         .content(asJsonString(alumno)))
                 .andExpect(status().isOk())
@@ -132,8 +166,8 @@ public class AlumnoControllerTest {
         alumnoSalida.setNombre("David");
         alumnoSalida.setApellidos("Vaquero");
         alumnoSalida.setEdad(44);
-        alumnoSalida.setId(1L);
-        mockMvc.perform(delete(baseURL+"/1")
+        alumnoSalida.setId(lastID);
+        mockMvc.perform(delete(baseURL+"/"+lastID)
                         .contentType("application/json"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))

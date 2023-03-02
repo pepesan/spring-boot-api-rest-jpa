@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 @RestController
 @RequestMapping("/api/alumno")
@@ -16,6 +19,8 @@ import java.util.Optional;
 public class AlumnoController {
     @Autowired
     private AlumnoRepository alumnoRepository;
+
+    private Long lastID = 0L;
 
     @GetMapping
     public ResponseEntity<Iterable<Alumno>> index(){
@@ -36,6 +41,24 @@ public class AlumnoController {
         return ResponseEntity.ok(true);
     }
 
+    @GetMapping("/edad/{edad}")
+    public List<Alumno> getByEdad(@PathVariable("edad") Integer edad){
+        return this.alumnoRepository.findAlumnoByEdad(edad);
+    }
+
+    @GetMapping("/lastid")
+    public Long getLastid(){
+        List<Alumno> list = this.alumnoRepository.findMaxId();
+
+        Optional<Alumno> alumno = list.stream().findFirst();
+        if (alumno.isPresent()){
+            log.info("lastID:" + alumno.get().getId());
+            lastID = alumno.get().getId();
+            return alumno.get().getId();
+        }else {
+            return lastID;
+        }
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Alumno>> showById(@PathVariable("id") Long id){
@@ -76,5 +99,7 @@ public class AlumnoController {
                 })
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+
 
 }
