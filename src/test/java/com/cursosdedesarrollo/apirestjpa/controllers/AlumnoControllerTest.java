@@ -49,7 +49,7 @@ public class AlumnoControllerTest {
     @BeforeEach
     public void setUp() throws Exception {
         List<Alumno> list = this.alumnoRepository.findMaxId();
-        if (list.size()>0){
+        if (list != null && list.size()>0){
             lastID = list.get(0).getId();
             testDeteleAll();
         }
