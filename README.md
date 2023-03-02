@@ -8,3 +8,7 @@ mvn spring-boot:run
 [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 ## Lanzamiento de tests
 mvn test
+# Ficheros de configuración
+- appication.h2.properties (h2)
+- appication.mysql.properties (mysql)
+- appication.properties (fichero por defecto)
