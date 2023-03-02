@@ -5,11 +5,10 @@ import com.cursosdedesarrollo.apirestjpa.repositories.AlumnoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class AlumnoServiceImpl implements AlumnoService{
@@ -19,6 +18,14 @@ public class AlumnoServiceImpl implements AlumnoService{
     @Override
     public List<Alumno> findAll() {
         Iterable<Alumno> iterable  = this.alumnoRepository.findAll();
+        List<Alumno> list = new LinkedList<>();
+        iterable.forEach(list::add);
+        return list;
+    }
+
+    @Override
+    public List<Alumno> findAll(Pageable pageable) {
+        Iterable<Alumno> iterable  = this.alumnoRepository.findAll(pageable);
         List<Alumno> list = new LinkedList<>();
         iterable.forEach(list::add);
         return list;
@@ -55,5 +62,11 @@ public class AlumnoServiceImpl implements AlumnoService{
             this.alumnoRepository.deleteById(id);
         }
         return alumnoOptional.orElse(null);
+    }
+
+    @Override
+    public Boolean deteleAll() {
+        this.alumnoRepository.deleteAll();
+        return true;
     }
 }
