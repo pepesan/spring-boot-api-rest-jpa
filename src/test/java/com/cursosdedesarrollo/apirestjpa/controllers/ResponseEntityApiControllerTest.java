@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest
+@WebMvcTest(ResponseEntityAPIController.class)
 public class ResponseEntityApiControllerTest {
 
     private static final String BASEURL = "/api/dato/response/";

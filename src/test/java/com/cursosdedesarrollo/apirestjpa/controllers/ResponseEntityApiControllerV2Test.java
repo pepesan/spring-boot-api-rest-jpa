@@ -17,7 +17,7 @@ import java.util.Date;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest
+@WebMvcTest(ResponseEntityAPIControllerV2.class)
 public class ResponseEntityApiControllerV2Test {
 
     private static final String BASEURL = "/api/dato/responsev2/";
