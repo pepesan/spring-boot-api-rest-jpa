@@ -46,6 +46,16 @@ public class AlumnoController {
         return this.alumnoRepository.findAlumnoByEdad(edad);
     }
 
+    @GetMapping("/maxid")
+    public Long getMaxId(){
+        Long id = this.alumnoRepository.findMaxIdLong();
+        log.info("id: "+ id);
+        if (id == null){
+            id = 0L;
+        }
+        return id;
+    }
+
     @GetMapping("/lastid")
     public Long getLastid(){
         List<Alumno> list = this.alumnoRepository.findMaxId();

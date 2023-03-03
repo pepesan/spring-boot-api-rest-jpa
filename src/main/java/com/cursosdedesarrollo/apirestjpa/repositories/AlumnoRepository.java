@@ -15,4 +15,7 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long> {
     @Query("from Alumnos ORDER BY id DESC")
     public List<Alumno> findMaxId();
 
+    @Query("SELECT max(a.id) from Alumnos a")
+    public Long findMaxIdLong();
+
 }
