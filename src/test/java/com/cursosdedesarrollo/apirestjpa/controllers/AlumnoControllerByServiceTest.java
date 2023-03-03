@@ -26,12 +26,6 @@ public class AlumnoControllerByServiceTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @Autowired
-    private AlumnoRepository alumnoRepository;
-
     private String baseURL = "/api/alumno-service";
 
     private static Long lastID;
