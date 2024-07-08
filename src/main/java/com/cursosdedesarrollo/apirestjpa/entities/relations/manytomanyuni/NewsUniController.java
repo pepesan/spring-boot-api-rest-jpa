@@ -29,7 +29,9 @@ public class NewsUniController {
     }
 
     @PostMapping("/{newsId}/categories/")
-    public NewsUni addCategoryToNews(@PathVariable Long newsId, @RequestBody CategoryUni category) {
+    public NewsUni addCategoryToNews(
+            @PathVariable Long newsId,
+            @RequestBody CategoryUni category) {
         NewsUni news = newsRepository.findById(newsId)
                 .orElseThrow(() -> new RuntimeException("News not found"));
         CategoryUni categoryGuardada = categoryRepository.findByName(category.getName());

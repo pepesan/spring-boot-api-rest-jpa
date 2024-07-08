@@ -23,8 +23,19 @@ public class UserUniController {
         return this.userRepository.save(user);
     }
 
+    @PostMapping("/todojunto/")
+    public User postUserProfile (
+            @PathVariable Long id,
+            @RequestBody User user){
+        this.userRepository.save(user);
+        //log.info(user.toString());
+        return user;
+    }
+
     @PostMapping("/{id}/userprofile")
-    public User postUserProfile (@PathVariable Long id, @RequestBody UserProfile userProfile){
+    public User postUserProfile (
+            @PathVariable Long id,
+            @RequestBody UserProfile userProfile){
         User user = this.userRepository.findById(id).orElse(new User());
         user.setUserProfile(userProfile);
         this.userRepository.save(user);

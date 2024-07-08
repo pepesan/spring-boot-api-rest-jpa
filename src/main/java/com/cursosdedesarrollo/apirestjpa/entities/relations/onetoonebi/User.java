@@ -36,7 +36,9 @@ public class User implements Serializable {
     @Size(max = 128)
     private String password;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(
+            mappedBy = "user",
+            cascade = CascadeType.ALL)
     @JsonManagedReference
     private UserProfile userProfile;
 

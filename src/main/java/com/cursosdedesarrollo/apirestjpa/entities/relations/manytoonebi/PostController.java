@@ -16,12 +16,12 @@ public class PostController {
     @Autowired
     private PostRepository postRepository;
 
-    @GetMapping
+    @GetMapping("/")
     public Page<Post> getAllPosts(Pageable pageable) {
         return postRepository.findAll(pageable);
     }
 
-    @PostMapping
+    @PostMapping("/")
     public Post createPost(@Valid @RequestBody Post post) {
         return postRepository.save(post);
     }

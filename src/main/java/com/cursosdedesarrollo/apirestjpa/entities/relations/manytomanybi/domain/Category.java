@@ -15,11 +15,13 @@ import static jakarta.persistence.GenerationType.AUTO;
 public class Category implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = AUTO)
-    @Column(name = "Ccategory_id", unique = true, nullable = false)
+    @Column(name = "Category_id", unique = true, nullable = false)
     private Integer categoryId;
     @Column(name = "NAME", nullable = false, length = 10)
     private String name;
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            mappedBy = "categories")
     private Set<Stock> stocks = new HashSet<Stock>(0);
 
 

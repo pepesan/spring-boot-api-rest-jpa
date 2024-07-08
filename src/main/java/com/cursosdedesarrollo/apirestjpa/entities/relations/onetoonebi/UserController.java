@@ -2,6 +2,7 @@ package com.cursosdedesarrollo.apirestjpa.entities.relations.onetoonebi;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class UserController {
         return user;
     }
     @PostMapping("/api/unoauno/{id}/userprofile")
+    @Transactional
     public User postUserProfile (@PathVariable Long id,  @RequestBody UserProfile userProfile){
         User user = this.userRepository.findById(id).orElse(new User());
         //log.info(user.toString());

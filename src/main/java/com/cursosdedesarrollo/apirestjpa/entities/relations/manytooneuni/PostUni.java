@@ -17,7 +17,12 @@ public class PostUni {
     private String title;
     private String content;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            // fetch = FetchType.EAGER
+            fetch = FetchType.LAZY // no devuelve los comentarios
+    )
     @JoinColumn(name = "post_id")
     private List<CommentUni> comments = new ArrayList<>();
 
