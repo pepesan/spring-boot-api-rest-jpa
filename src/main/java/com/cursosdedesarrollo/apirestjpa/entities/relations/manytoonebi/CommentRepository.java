@@ -1,4 +1,4 @@
-package com.cursosdedesarrollo.apirestjpa.entities.relations.manytoone;
+package com.cursosdedesarrollo.apirestjpa.entities.relations.manytoonebi;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

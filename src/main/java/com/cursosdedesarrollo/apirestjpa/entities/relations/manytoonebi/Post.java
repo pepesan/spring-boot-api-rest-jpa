@@ -1,4 +1,4 @@
-package com.cursosdedesarrollo.apirestjpa.entities.relations.manytoone;
+package com.cursosdedesarrollo.apirestjpa.entities.relations.manytoonebi;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

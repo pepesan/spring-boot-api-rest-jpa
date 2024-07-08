@@ -1,4 +1,4 @@
-package com.cursosdedesarrollo.apirestjpa.entities.relations.manytoone;
+package com.cursosdedesarrollo.apirestjpa.entities.relations.manytoonebi;
 
 
 import jakarta.validation.Valid;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/posts")
+@RequestMapping("/api/posts")
 public class PostController {
 
     @Autowired

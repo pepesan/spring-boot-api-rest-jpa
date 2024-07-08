@@ -1,6 +1,5 @@
-package com.cursosdedesarrollo.apirestjpa.entities.relations.onetoone;
+package com.cursosdedesarrollo.apirestjpa.entities.relations.onetooneuni;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -9,8 +8,8 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-@Entity
-@Table(name = "users")
+@Entity(name = "UserUni")
+@Table(name = "USERS_UNI")
 @Data
 public class User implements Serializable {
     @Id
@@ -36,8 +35,7 @@ public class User implements Serializable {
     @Size(max = 128)
     private String password;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_profile_id")
     private UserProfile userProfile;
-
 }

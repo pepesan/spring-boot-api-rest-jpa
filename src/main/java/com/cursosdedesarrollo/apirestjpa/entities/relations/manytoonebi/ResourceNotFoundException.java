@@ -1,4 +1,4 @@
-package com.cursosdedesarrollo.apirestjpa.entities.relations.manytoone;
+package com.cursosdedesarrollo.apirestjpa.entities.relations.manytoonebi;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

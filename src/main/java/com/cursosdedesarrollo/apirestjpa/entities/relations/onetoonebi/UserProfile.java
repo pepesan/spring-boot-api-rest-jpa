@@ -1,4 +1,4 @@
-package com.cursosdedesarrollo.apirestjpa.entities.relations.onetoone;
+package com.cursosdedesarrollo.apirestjpa.entities.relations.onetoonebi;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
