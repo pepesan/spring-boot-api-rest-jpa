@@ -2,15 +2,19 @@ package com.cursosdedesarrollo.apirestjpa.entities.relations.manytoonebi;
 
 
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/posts")
+@Slf4j
 public class PostController {
 
     @Autowired
@@ -28,9 +32,12 @@ public class PostController {
 
 
     @GetMapping("/{postId}")
-    public Post getPost(@PathVariable Long postId) {
-        return postRepository.findById(postId)
+    public ResponseEntity<Post> getPost(@PathVariable Long postId) {
+        Optional<Post> postGuardado
+                = postRepository.findById(postId);
+        return postGuardado.map(ResponseEntity::ok)
                 .orElseThrow(() -> new ResourceNotFoundException("PostId " + postId + " not found"));
+
     }
 
     @PutMapping("/{postId}")

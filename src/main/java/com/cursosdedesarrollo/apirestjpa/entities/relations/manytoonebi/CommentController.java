@@ -2,16 +2,20 @@ package com.cursosdedesarrollo.apirestjpa.entities.relations.manytoonebi;
 
 
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
 @RequestMapping("/api/posts")
+@Slf4j
 public class CommentController {
 
     @Autowired
@@ -34,8 +38,13 @@ public class CommentController {
                 .findById(postId)
                 .map(post -> {
                     comment.setPost(post);
-                    //post.getComments().add(comment);
+//                    List<Comment> listado = post.getComments();
+//                    if(listado==null){
+//                        listado = new ArrayList<>();
+//                    }
+                    //listado.add(comment);
                     commentRepository.save(comment);
+                    //log.info(listado.toString());
                     //postRepository.save(post);
                     return comment;
                 }).orElseThrow(() -> new ResourceNotFoundException("PostId " + postId + " not found"));

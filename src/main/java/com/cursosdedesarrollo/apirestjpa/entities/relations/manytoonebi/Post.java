@@ -1,18 +1,25 @@
 package com.cursosdedesarrollo.apirestjpa.entities.relations.manytoonebi;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "posts")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Post{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,10 +38,19 @@ public class Post{
     @Lob
     private String content;
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER,
             mappedBy = "post")
-    private Set<Comment> comments = new HashSet<>();
+    private List<Comment> comments;
+
+    public void addComment(Comment comment){
+        comments.add(comment);
+    }
+
+    public void removeComment(Comment comment){
+        comments.remove(comment);
+    }
 
 }
