@@ -84,6 +84,16 @@
 			<artifactId>cache-api</artifactId>
 			<version>1.1.1</version>
 		</dependency>
+		<!-- Auditado -->
+		<!--dependency>
+			<groupId>org.hibernate.orm</groupId>
+			<artifactId>hibernate-envers</artifactId>
+			<version>6.4.4.Final</version>
+		</dependency-->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-envers</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
