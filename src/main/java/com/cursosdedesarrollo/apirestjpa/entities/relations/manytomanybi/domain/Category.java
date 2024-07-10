@@ -20,7 +20,7 @@ public class Category implements java.io.Serializable {
     private Integer categoryId;
     @Column(name = "NAME", nullable = false, length = 10)
     private String name;
-    @ManyToMany(
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE },
             fetch = FetchType.LAZY,
             mappedBy = "categories")
     //@JsonBackReference

@@ -43,7 +43,7 @@ public class StockController {
     }
 
     @PostMapping("/{id}/category/")
-    public Stock gaddCategoryById(
+    public Stock addCategoryById(
             @PathVariable("id") Long id,
             @RequestBody Category category
     ){
@@ -55,7 +55,7 @@ public class StockController {
                     .findByName(category.getName())
                     .stream().findFirst();
             Category actualCategory;
-            actualCategory = posibleCategoria.orElseGet(() -> this.categoryRepository.save(category));
+            actualCategory = posibleCategoria.orElseGet(() -> category);
             actualStock.getCategories().add(actualCategory);
             this.stockRepository.save(actualStock);
             //actualCategory.getStocks().add(actualStock);
@@ -64,5 +64,28 @@ public class StockController {
         }
         return new Stock();
 
+    }
+    // TODO: Revisar porque no hat relación en stock_category
+    @PostMapping("/{id}/stock/")
+    public Category addStockById(
+            @PathVariable("id") Long id,
+            @RequestBody Stock stock
+    ){
+        Optional< Category> posibleCategory = this.categoryRepository
+                .findById(id);
+        if (posibleCategory.isPresent()){
+            Category actualCategory = posibleCategory.get();
+            Optional<Stock> posibleStock = this.stockRepository
+                    .findByStockCode(stock.getStockCode())
+                    .stream().findFirst();
+            Stock actualStock;
+            actualStock = posibleStock.orElseGet(() -> stock);
+            actualCategory.getStocks().add(actualStock);
+            this.categoryRepository.save(actualCategory);
+            //actualCategory.getStocks().add(actualStock);
+            //this.categoryRepository.save(actualCategory);
+            return actualCategory;
+        }
+        return new Category();
     }
 }
