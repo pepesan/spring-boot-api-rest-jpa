@@ -1,5 +1,6 @@
 package com.cursosdedesarrollo.apirestjpa.entities.relations.manytomanybi.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -24,12 +25,13 @@ public class Stock implements java.io.Serializable {
     private String stockCode;
     @Column(name = "STOCK_NAME", unique = true, nullable = false, length = 20)
     private String stockName;
-    @ManyToMany
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(
             name = "stock_category",
             joinColumns = @JoinColumn(name = "stock_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
+    //@JsonManagedReference
     private Set<Category> categories = new HashSet<>();
 
 }

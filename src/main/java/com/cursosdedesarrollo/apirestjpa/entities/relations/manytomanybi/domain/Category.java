@@ -1,5 +1,6 @@
 package com.cursosdedesarrollo.apirestjpa.entities.relations.manytomanybi.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,6 +23,7 @@ public class Category implements java.io.Serializable {
     @ManyToMany(
             fetch = FetchType.LAZY,
             mappedBy = "categories")
+    //@JsonBackReference
     private Set<Stock> stocks = new HashSet<Stock>(0);
 
 
